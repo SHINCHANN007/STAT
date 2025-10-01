@@ -1,0 +1,60 @@
+Code:
+#EX1
+pbinom(5,100,0.05, lower.tail = FALSE)
+pbinom(10,100,0.05, lower.tail = FALSE)
+
+pbinom(15,100,0.05, lower.tail = FALSE)
+pbinom(5,100,0.05, lower.tail = FALSE)
+[1] 0.3840009
+pbinom(10,100,0.05, lower.tail = FALSE)
+[1] 0.01147241
+pbinom(15,100,0.05, lower.tail = FALSE)
+[1] 3.705408e-05
+#EX2
+#X>1
+pbinom(1,50,0.02, lower.tail = FALSE)
+#x>=3
+pbinom(2,50,0.02, lower.tail = FALSE)
+#X>1
+pbinom(1,50,0.02, lower.tail = FALSE)
+[1] 0.2642286
+#x>=3
+pbinom(2,50,0.02, lower.tail = FALSE)
+[1] 0.07842775
+#EX 3
+pbinom(1,20,0.04, lower.tail = FALSE)
+pbinom(1,20,0.04, lower.tail = FALSE)
+[1] 0.1896622
+
+#EX 5
+#x>5
+pbinom(5,50,0.1, lower.tail = FALSE)  
+#X<20
+pbinom(19,50,0.1, lower.tail =FALSE) 	
+#x>5
+pbinom(5,50,0.1, lower.tail = FALSE)  
+[1] 0.383877
+#X<20
+pbinom(19,50,0.1, lower.tail =FALSE) 	
+[1] 2.368599e-08
+
+EX1
+dpois(0,10)
+[1] 4.539993e-05
+
+EX2
+ppois(110,100,lower.tail = FALSE)
+[1] 0.1471373
+ ppois(2,1, lower.tail = FALSE)
+[1] 0.0803014
+
+#dpois() → Probability Mass Function
+x <- 0:10
+pmf <- dpois(x, lambda = 5)
+
+plot(x, pmf,
+     type = "h",   # histogram-like vertical lines
+     lwd = 3,      # line width
+     main = "Poisson PMF (λ=5)",
+     xlab = "Number of events (x)",
+     ylab = "P(X = x)")
