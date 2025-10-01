@@ -1,0 +1,111 @@
+# =========================================
+# 1) One-Sample T-Test
+# When population mean & SD are not known
+
+# Sample data
+x <- c(109,112,106,110,108,115,99,108,104,111)
+
+# Test for normality
+shapiro.test(x)
+
+# Compare sample mean with hypothesized population mean
+t.test(x, mu=100, alternative='two.sided')  # Two-sided test
+t.test(x, mu=67, alternative='two.sided')   # Compare with 67
+t.test(x, alternative='two.sided')          # Default mu=0
+
+# Another example
+mydata <- c(14,14,16,13,12,17,15,14,15,13,15,14)
+t.test(mydata, mu=15)
+
+sample <- c(12,14,15,17,19,20,22,25,28,30)
+hypothesized_mean <- 18
+t_test <- t.test(sample, mu=hypothesized_mean)
+print(t_test)
+
+dat <- data.frame(value=c(0.9,-0.8,1.3,-0.3,1.7))
+t.test(dat$value, mu=1)
+
+x <- c(3,7,11,0,7,0,4,5,6,2)
+t.test(x)        # Default mu=0
+t.test(x, mu=3)  # Compare mean with 3
+
+miceweight <- c(12,13,12,14,13,12,12,15,16,12,13,12,11,11,12)
+t.test(miceweight, mu=12)
+
+# Random normal data
+set.seed(150)
+data <- data.frame(value=rnorm(30, mean=50, sd=10))
+t.test(data$value, mu=50)
+
+set.seed(123)
+sugar_cookie <- rnorm(30, mean=9.99, sd=0.04)
+t.test(sugar_cookie, mu=10)
+
+set.seed(123)
+sugar_cookie1 <- rnorm(30, mean=9.99, sd=4)
+t.test(sugar_cookie1, mu=10)
+
+# =========================================
+# 2) Paired T-Test
+# Compare means of two related samples
+
+before <- c(157,160,158,152,154,156,151)
+after <- c(160,164,161,155,155,157,156)
+t.test(before, after, paired = TRUE)
+
+set.seed(123)
+before <- rnorm(7, mean=50000, sd=50)
+after <- rnorm(7, mean=50075, sd=50)
+t.test(before, after, paired = TRUE)
+
+# Using data frame - paired t-test with vectors
+pre_scores <- before
+post_scores <- after
+t.test(pre_scores, post_scores, paired = TRUE)
+
+# Another example using data frame
+before <- c(12.2,14.6,13.4,11.2,12.7,10.4,15.8,13.9,9.5,14.2)
+after <- c(13.5,15.2,13.6,12.8,13.7,11.3,16.5,13.4,8.7,14.6)
+my_data <- data.frame(subject=rep(1:10, 2),
+                      time=rep(c("before","after"), each=10),
+                      score=c(before, after))
+# Paired t-test using vectors
+t.test(my_data$score[my_data$time=="before"],
+       my_data$score[my_data$time=="after"], paired = TRUE)
+
+# =========================================
+# 3) Two-Sample T-Test (Independent)
+# Compare means of two independent groups
+
+wt <- c(67,58,54,78,80,63,52,50,76,69,72,51,73,65)
+gender <- factor(c('M','F','F','M','F','F','F','M','M','M','M','F','M','M'))
+
+# Normality and variance check
+shapiro.test(wt)
+boxplot(wt ~ gender)
+library(car)
+leveneTest(wt ~ gender)
+
+# Independent t-test (assume equal variance)
+t.test(wt ~ gender, var.equal=TRUE)
+
+# Another example with generated data
+set.seed(125)
+g1 <- rnorm(100, mean=24, sd=3)
+g2 <- rnorm(100, mean=43, sd=2.4)
+t.test(g1, g2)  # Independent t-test by default (paired=FALSE)
+
+# =========================================
+# 4) Real-Life Examples (mtcars dataset)
+
+# One-sample t-test
+t.test(mtcars$mpg, mu=150)
+t.test(mtcars$cyl, mu=150)
+
+# Independent t-test comparing mpg across transmission types (0=automatic, 1=manual)
+t.test(mtcars$mpg ~ as.factor(mtcars$am))
+
+# Compare two numeric variables - usually independent
+t.test(mtcars$mpg, mtcars$hp)
+
+
