@@ -1,0 +1,24 @@
+#Ques1
+ballA <- c(271, 282, 257, 248, 262)
+ballB <- c(252, 275, 302, 268, 276)
+ballC <- c(260, 255, 239, 246, 266)
+ballD <- c(279, 242, 294, 270, 258)
+
+# Combine into one dataset
+values <- c(ballA, ballB, ballC, ballD)
+groups <- factor(rep(c("A", "B", "C", "D"), each = 5))
+
+# Perform Kruskal-Wallis Test
+kruskal.test(values ~ groups)
+
+
+#Ques2
+# Plant growth data under 3 fertilizers
+fertilizerA <- c(12, 15, 14, 10, 13)
+fertilizerB <- c(18, 20, 19, 22, 21)
+fertilizerC <- c(11, 13, 12, 10, 14)
+
+values <- c(fertilizerA, fertilizerB, fertilizerC)
+groups <- factor(rep(c("A", "B", "C"), each = 5))
+
+kruskal.test(values ~ groups)
