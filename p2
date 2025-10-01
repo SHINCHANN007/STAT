@@ -1,0 +1,35 @@
+#PRAC - 1 
+
+#mean median mode sd var
+
+data <- c(5,6,8,9,7,2,10)
+
+meanVal <- mean(data)
+
+cat(meanVal)
+
+meadianVal <- median(data)
+
+cat('median :',meadianVal)
+
+varVal <- var(data)
+
+cat("Variance :",varVal)
+
+sdVal <- sd(data)
+
+cat("standadrd diviation :",sdVal)
+
+#quartile iqr range
+
+range <- max(data) - min(data)
+cat("range : ",range)
+
+fr <- range(data)
+cat("full range :",fr)
+
+Ir <- IQR(data)
+
+cat("IQR :",Ir)
+
+
