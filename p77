@@ -58,3 +58,9 @@ plot(x, pmf,
      main = "Poisson PMF (λ=5)",
      xlab = "Number of events (x)",
      ylab = "P(X = x)")
+# Plot
+plot(x, y, type = "h", lwd = 2, col = "blue",
+     main = paste("Poisson Distribution (?? =", lambda, ")"),
+     xlab = "Number of Events (x)", ylab = "Probability",
+     ylim = c(0, max(y) + 0.02))
+points(x, y, pch = 16, col = "red")
