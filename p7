@@ -1,0 +1,58 @@
+# =================================
+# 1️⃣ Binomial Distribution
+# =================================
+
+# Exact probabilities (PMF)
+dbinom(5, 100, 0.05)
+dbinom(10, 100, 0.05)
+dbinom(15, 100, 0.05)
+
+
+# EX1: n=100, p=0.05
+pbinom(5, 100, 0.05, lower.tail = FALSE)
+pbinom(10, 100, 0.05, lower.tail = FALSE)
+pbinom(15, 100, 0.05, lower.tail = FALSE)
+
+# EX2: n=50, p=0.02
+pbinom(1, 50, 0.02, lower.tail = FALSE)    # P(X > 1)
+pbinom(2, 50, 0.02, lower.tail = FALSE)    # P(X >= 3)
+
+# EX3: n=20, p=0.04
+pbinom(1, 20, 0.04, lower.tail = FALSE)
+
+# EX5: n=50, p=0.1
+pbinom(5, 50, 0.1, lower.tail = FALSE)   # P(X > 5)
+pbinom(19, 50, 0.1, lower.tail = FALSE)  # P(X < 20)
+
+# ============================
+# 2️⃣ Poisson Distribution
+# ============================
+
+# EX1: P(X=0) with lambda=10
+dpois(0, 10)
+
+# EX2: CDF examples
+ppois(110, 100, lower.tail = FALSE)
+ppois(2, 1, lower.tail = FALSE)
+
+# PMF and Plot
+lambda <- 5
+x <- 0:10
+pmf <- dpois(x, lambda)
+
+plot(x, pmf,
+     type = "h",
+     lwd = 3,
+     main = paste("Poisson PMF (λ =", lambda, ")"),
+     xlab = "Number of events (x)",
+     ylab = "P(X = x)")
+points(x, pmf, pch = 16, col = "red")
+
+# Alternative styled plot
+plot(x, pmf, type = "h", lwd = 2, col = "blue",
+     main = paste("Poisson Distribution (λ =", lambda, ")"),
+     xlab = "Number of Events (x)",
+     ylab = "Probability",
+     ylim = c(0, max(pmf) + 0.02))
+points(x, pmf, pch = 16, col = "red")
+
