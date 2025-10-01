@@ -1,0 +1,138 @@
+# =========================================
+# 1) One-Way ANOVA Examples
+# Compare means of a numeric variable across one factor
+
+# Example: Income by occupation
+income <- c(20000,15000,32000,43000,25000,18000,28000,35000,42000,30000,27000,12000)
+occupation <- factor(c('Bhelwala','Sevpuriwala','Bhelwala','Sevpuriwala','Rickshawala','Rickshawala',
+                       'Sevpuriwala','Bhelwala','Bhelwala','Sevpuriwala','Sevpuriwala','Rickshawala'))
+shapiro.test(income)           # Normality test
+boxplot(income ~ occupation)   # Boxplot
+library(car)
+leveneTest(income ~ occupation) # Homogeneity of variance
+result <- aov(income ~ occupation)
+summary(result)                # Check p-value
+
+# Example: Weight by blood group
+wt <- c(58,42,46,52,49,51,57,55,56,53,50,52)
+bg <- factor(c('A','B','O','O','A','B','O','A','B','B','O','O'))
+shapiro.test(wt)
+boxplot(wt ~ bg)
+leveneTest(wt ~ bg)
+result <- aov(wt ~ bg)
+summary(result)
+
+# Example: Worker time
+worker <- factor(c('Hank','Hank','Hank','Hank','Hank','Joseph','Joseph','Joseph','Joseph','Joseph',
+                   'Susan','Susan','Susan','Susan','Susan'))
+time <- c(8,10,9,11,10,8,9,9,8,10,10,9,10,11,9)
+shapiro.test(time)
+boxplot(time ~ worker)
+leveneTest(time ~ worker)
+result <- aov(time ~ worker)
+summary(result)
+
+# =========================================
+# 2) Two-Way ANOVA Examples
+# Compare numeric variable across two factors
+
+# Example: Marks by gender and age
+marks <- c(4,6,8,6,6,9,8,9,13,4,8,9,7,10,13,12,14,16)
+gender <- factor(c('B','B','B','B','B','B','B','B','B','G','G','G','G','G','G','G','G','G'))
+age <- factor(c('T','T','T','E','E','E','TW','TW','TW','T','T','T','E','E','E','TV','TV','TV'))
+shapiro.test(marks)
+boxplot(marks ~ gender)
+leveneTest(marks ~ gender)
+leveneTest(marks ~ age)
+result <- aov(marks ~ gender + age)
+summary(result)
+
+# Example: mtcars dataset (disp by gear and am)
+df <- mtcars
+df$gear <- factor(df$gear)
+df$am   <- factor(df$am)
+mtcars_aov <- aov(disp ~ gear * am, data=df)
+summary(mtcars_aov)
+
+# =========================================
+# 3) ANOVA Using Built-in R Datasets
+
+# PlantGrowth dataset
+data <- PlantGrowth
+res.aov <- aov(weight ~ group, data=data)
+summary(res.aov)
+
+# Iris dataset
+data <- iris
+result <- aov(Petal.Length ~ Species, data=data)
+summary(result)
+
+# mtcars dataset: mpg by gear
+test <- aov(mtcars$mpg ~ as.factor(mtcars$gear))
+summary(test)
+
+# mtcars: mpg by hp
+mtcars_aov1 <- aov(mpg ~ factor(hp), data=mtcars)
+summary(mtcars_aov1)
+
+# =========================================
+# 4) ANOVA with CSV / Real-Life Datasets
+
+# Corn crake experiment
+corn <- read.csv("CORN_CRAKE.csv")
+corncrake <- lm(WeightGain ~ Supplement, data=corn)
+anova(corncrake)
+
+# Diet dataset
+diet <- read.csv("diet.csv")
+wt <- diet$initial.weight - diet$final.weight
+diettype <- factor(diet$type, levels=c("A","B","C"))
+gender <- factor(diet$gender, levels=c("Female","Male"))
+result <- aov(wt ~ diettype, data=diet)
+summary(result)
+
+# Crop data
+df <- read.csv("crop.data.csv")
+df$density <- factor(df$density)
+df$block <- factor(df$block)
+df$fertilizer <- factor(df$fertilizer)
+
+summary(aov(yield ~ block, data=df))
+summary(aov(yield ~ density, data=df))
+summary(aov(yield ~ fertilizer, data=df))
+
+# Poison dataset
+path <- read.csv("poisons.csv")
+animal <- factor(c('Dog','Dog','Dog','Dog','Dog','Cat','Cat','Cat','Cat','Cat','Horse','Horse','Horse','Horse','Horse'))
+wt <- c(11,13,10,14,12,16,17,15,13,19,21,19,20,22,18)
+shapiro.test(wt)
+boxplot(wt)
+leveneTest(wt ~ animal)
+result <- aov(wt ~ animal)
+summary(result)
+
+# Weight loss program example
+data <- data.frame(program=rep(c("A","B","C"), each=30),
+                   weight_loss=c(runif(30,0,4), runif(30,0,5), runif(30,1,7)))
+head(data)
+model <- aov(weight_loss ~ program, data=data)
+summary(model)
+
+# Radon example
+radon <- data.frame(D = c(0.37,0.37,0.37,0.37,0.51,0.51,0.51,0.51,0.71,0.71,0.71,0.71,
+                          1.02,1.02,1.02,1.02,1.4,1.4,1.4,1.4,1.99,1.99,1.99,1.99),
+                    RR = c(80,83,83,85,75,75,79,79,74,73,76,77,67,72,74,74,62,62,67,69,
+                           60,61,64,66))
+str(radon)
+
+# Cholesterol dataset
+library(multcomp)
+str(cholesterol)
+a <- aov(cholesterol$response ~ cholesterol$trt)
+summary(a)
+
+# Palmerpenguins dataset
+install.packages("palmerpenguins")
+library(palmerpenguins)
+data <- penguins
+str(data)
