@@ -1,0 +1,37 @@
+# ===============================
+# 1️⃣ Sample Data
+# ===============================
+x <- c(5, 7, 9, 10, 12, 15, 7, 9, 10)
+y <- c(10, 15, 20, 25, 30, 35, 20, 25, 30)
+
+# ===============================
+# 2️⃣ Correlation
+# ===============================
+cor_pearson <- cor(x, y, method = "pearson")
+cor_spearman <- cor(x, y, method = "spearman")
+cor_kendall <- cor(x, y, method = "kendall")
+
+cat("Pearson correlation:", cor_pearson, "\n")
+cat("Spearman correlation:", cor_spearman, "\n")
+cat("Kendall correlation:", cor_kendall, "\n")
+
+# ===============================
+# 3️⃣ Linear Regression
+# ===============================
+model <- lm(y ~ x)  # y = intercept + slope*x
+summary(model)      # shows coefficients, R-squared, p-value
+
+# ===============================
+# 4️⃣ Plot: Scatter + Regression Line
+# ===============================
+plot(x, y, main="Scatter Plot with Regression Line",
+     xlab="X", ylab="Y", pch=16, col="blue")
+abline(model, col="red", lwd=2)  # adds regression line
+legend("topleft", legend=c("Data","Regression Line"),
+       col=c("blue","red"), pch=c(16,NA), lty=c(NA,1), lwd=c(NA,2))
+
+# ===============================
+# 5️⃣ Optional: Predicted values and residuals
+# ===============================
+pred <- predict(model)       # predicted y values
+resid <- residuals(model)    # residuals
