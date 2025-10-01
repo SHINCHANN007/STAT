@@ -1,0 +1,39 @@
+# Sample dataset
+data <- data.frame(
+  ID = 1:5,
+  Math = c(70, 85, 60, 90, 75),
+  Science = c(80, 78, 72, 95, 88)
+)
+print(data)
+
+# Add new column: Total
+data$Total <- data$Math + data$Science
+
+# Average marks
+data$Average <- (data$Math + data$Science) / 2
+
+# Difference between Math and Science
+data$Diff <- data$Math - data$Science
+
+# Product of Math and Science scores
+data$Product <- data$Math * data$Science
+
+# Square, square root, log
+data$Math_Square <- data$Math^2
+data$Science_Sqrt <- sqrt(data$Science)
+data$Math_Log <- log(data$Math)  # natural log
+
+# Percentage (out of 200)
+data$Percentage <- (data$Total / 200) * 100
+
+# Basic statistics
+mean_math <- mean(data$Math)
+sd_science <- sd(data$Science)
+var_math <- var(data$Math)
+
+cat("Mean (Math):", mean_math, "\n")
+cat("SD (Science):", sd_science, "\n")
+cat("Variance (Math):", var_math, "\n")
+
+# Final dataset
+print(data)
