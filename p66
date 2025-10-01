@@ -1,0 +1,70 @@
+Exercise 1: Two Dice Rolled
+Find P(sum = 10), P(sum ≥ 10), and P(sum = 10 | sum ≥ 10):
+outcomes <- expand.grid(1:6, 1:6)
+ sums <- rowSums(outcomes)
+
+ p_exact_10 <- mean(sums == 10)
+ p_atleast_10 <- mean(sums >= 10)
+ p_conditional <- mean(sums == 10 & sums >= 10) / p_atleast_10
+
+ cat("P(sum = 10):", p_exact_10, "\n")
+P(sum = 10): 0.08333333 
+ Cat("P(sum ≥ 10):", p_atleast_10, "\n")
+P(sum = 10): 0.1666667 
+cat("P(sum = 10 | sum ≥ 10):", p_conditional, "\n")
+P(sum = 10 | sum = 10): 0.5 
+
+Exercise 2: Drawing Slips from a Hat
+A hat contains slips numbered 1 to 6. Two are drawn without replacement. Find same probabilities as in Exercise 1:
+outcomes <- combn(1:6, 2)
+ sums <- colSums(outcomes)
+
+ p_sum_10 <- mean(sums == 10)
+ p_sum_atleast_10 <- mean(sums >= 10)
+ p_sum_10_given_10plus <- p_sum_10 / p_sum_atleast_10
+
+ cat("P(sum = 10):", p_sum_10, "\n")
+ cat("P(sum ≥ 10):", p_sum_atleast_10, "\n")
+ cat("P(sum = 10 | sum ≥ 10):", p_sum_10_given_10plus, "\n")
+cat("P(sum = 10):", p_sum_10, "\n")
+P(sum = 10): 0.06666667 
+ cat("P(sum ≥ 10):", p_sum_atleast_10, "\n")
+P(sum = 10): 0.1333333 
+ cat("P(sum = 10 | sum ≥ 10):", p_sum_10_given_10plus, "\n")
+P(sum = 10 | sum = 10): 0.5 
+
+Exercise 3: One Die is Twice the Other
+Find the probability that one die shows a number that is twice the other:
+outcomes <- expand.grid(1:6, 1:6)
+ p <- mean(outcomes$Var1 == 2 * outcomes$Var2 | outcomes$Var2 == 2 * outcomes$Var1)
+cat("P(one die is twice the other):", p, "\n")
+P(one die is twice the other): 0.1666667 
+
+Exercise 4: Difference of Dice
+Find the probability that the difference is 0 and the probability that it is 4:
+diffs <- abs(outcomes$Var1 - outcomes$Var2)
+ p_0 <- mean(diffs == 0)
+ p_4 <- mean(diffs == 4)
+ cat("P(diff = 0):", p_0, "\n")
+ cat("P(diff = 4):", p_4, "\n")
+P(diff = 0): 0.1666667 
+P(diff = 4): 0.1111111 
+
+Exercise 5: Events A, B, C, D
+Event A: sum = 7, B: white die odd, C: red > white, D: both equal. Check disjoint and independence:
+outcomes <- expand.grid(white = 1:6, red = 1:6)
+ A <- outcomes$white + outcomes$red == 7
+ B <- outcomes$white %% 2 == 1
+ C <- outcomes$red > outcomes$white
+ D <- outcomes$white == outcomes$red
+
+ intersect_AB <- A & B
+ cat("Are A and B disjoint?", all(!intersect_AB), "\n")
+
+ indep <- mean(A & B) == mean(A) * mean(B)
+ cat("Are A and B independent?", indep, "\n")
+Are A and B disjoint? FALSE 
+Are A and B independent? TRUE 
+
+
+
