@@ -1,0 +1,70 @@
+#Question 1
+df = read.csv("anova.csv")   #Easy work do by csv file
+df
+model=aov(runs~players, data=df)
+model
+summary(model)    #We fail to reject the null hypothetis. Value=0.605
+#OR
+data = c(18,25,20,11,18,24,9,7,8,13,11,30,15,14,12,30,25,17,22,18,9,12,15,16,9,28,15,20,16,20,10,13,17,23,8,30)
+match = factor(c('A','A','A','A','A','A','B','B','B','B','B','B','C','C','C','C','C','C','D','D','D','D','D','D','E','E','E','E','E','E','F','F','F','F','F','F'))
+model = aov(data~match)
+model
+summary(model)
+
+#Question no.2
+da = read.csv("tech.csv")
+da
+model=aov(Plant~Tech)
+df=aov(Plant~Tech, data=da)
+summary(df)         #We fail to reject the null hypothetis. Value=0.156
+
+ada = read.csv("replica.csv")
+ada
+dw=aov(replica~time, data=ada)
+summary(dw)         #We fail to reject the null hypothesis. Value=0.874
+
+ganesh = read.csv("RUNTEAM.csv")
+ganesh
+dw=aov(RUN~TEAM, data=ganesh)
+summary(dw)         #We fail to reject the null hypothesis. Value=0.574
+
+data=c(6,7,3,8,5,5,3,7,5,4,3,4)
+land=factor(c('A','A','A','A','B','B','B','B','C','C','C','C'))
+df= aov(data~land)
+summary(df)
+
+data=c(16,10,11,9,9,10,9,14,12,11,15,8,8,10,18,12,6,13,13,12,13,11,10,7,14)
+group=factor(c('A','B','C','D','E','E','C','A','B','D','B','D','E','C','A','D','E','B','A','C','C','A','D','E','B'))
+summary(aov(data~group))    #We fail to accept the null hypothesis. Value=0.000428
+
+data=c(55,65,58,59,72,66,57,57,47,53,74,58)
+wheat=factor(c('w1','w1','w1','w1','w2','w2','w2','w2','w3','w3','w3','w3'))
+summary(aov(data~wheat))
+
+data=c(5,7,9,4,8,6,4,5,6,7,4,7)
+salesman=factor(c('A','A','A','B','B','B','C','C','C','D','D','D'))
+summary(aov(data~salesman))
+
+mileage=c(13,12,12,11,11,10,11,13,12,10,11,9,13,11,12,10,14,11,13,10,13,10,14,8)
+brand=factor(c('W','W','W','W','W','W','X','X','X','X','X','X','Y','Y','Y','Y','Y','Y','Z','Z','Z','Z','Z','Z'))
+summary(aov(mileage~brand))
+        
+sales=c(23,20,40,34,35,34,30,34,20,29,45,45,25,28,30,40)
+emp=factor(c('A','B','D','A','C','A','B','D','B','C','C','A','C','D','B','D'))
+summary(aov(sales~emp))
+
+str(mtcars)
+df=mtcars
+df$gear=factor(df$gear)
+df$cyl=factor(df$cyl)
+df$am=factor(df$am)
+summary(aov(mpg~gear+am, data=df))      #We fail to accept the null hypothesis
+
+df=read.csv('crop.data.csv')
+df
+df$density = factor(df$density)
+df$block = factor(df$block)
+df$fertilizer = factor(df$fertilizer)
+summary(aov(yield~density+fertilizer, data=df))   #We fail to accept the null hypothesis
+summary(aov(yield~density+block, data=df))
+summary(aov(yield~block+fertilizer, data=df))
