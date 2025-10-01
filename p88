@@ -1,0 +1,70 @@
+Code:
+# real life example of normal distribution
+#EX1
+rnorm(10, 1)
+Output:
+[1]  0.44415887  2.78691314  1.49785048 -0.96661716  1.70135590
+ [6]  0.52720859 -0.06782371  0.78202509 -0.02600445  0.27110877
+
+#standard normal distribution problem and solution pdf
+#p1
+pnorm(70,50,15)- pnorm(49,50,15)
+[1] 0.4353652
+
+#P2
+pnorm(100,90,10,lower.tail = FALSE)
+[1] 0.1586553
+
+#EX 1
+pnorm(39,30,4)
+[1] 0.9877755
+
+pnorm(21,30,4 , lower.tail = FALSE)
+[1] 0.9877755
+
+pnorm(34,30,4) - pnorm(30,30,4, lower.tail = FALSE)
+[1] 0.3413447
+
+#EX1
+pnorm(100, 90,10, lower.tail = FALSE)
+[1] 0.1586553
+
+#EX2
+pnorm(69, 50,15)-pnorm(50, 50, 15, lower.tail = FALSE)
+[1] 0.3973627
+
+#EX3
+pnorm(585,500,100)
+[1] 0.8023375
+
+#ex 4
+pnorm(5.02,5,0.02)-pnorm(4.97,5,0.02)
+[1] 0.7745375
+
+#EX 5
+pnorm(12,12,2)-pnorm(6,12,2)
+[1] 0.4986501
+
+# Normal Distribution problems
+
+# Helper normal distribution probabilities
+pnorm_less <- function(x, mean, sd) pnorm(x, mean, sd)
+pnorm_greater <- function(x, mean, sd) 1 - pnorm(x, mean, sd)
+pnorm_between <- function(x1,?x2, mean, sd) pnorm(x2, mean, sd) - pnorm(x1, mean, sd)
+
+# 1) Normal ??=30, ??=4
+mu_n1 <- 30
+sd_n1 <- 4
+P_x_less_40 <- pnorm_less(40, mu_n1, sd_n1)
+P_x_greater_21 <- pnorm_greater(21, mu_n1, sd_n1)
+P_between_30_35 <- pnorm_between(30, 35, mu_n1, sd_n1)
+
+# 2) Speeds: ??=90, ??=10, P(X>100)
+mu_n2 <- 90
+sd_n2 <- 10
+P_speed_gt_100 <- pnorm_greater(100, mu_n2, sd_n2)
+
+# 3) Battery time ??=50, ??=15, P(50 < X < 70)
+mu_n3 <- 50
+sd_n3 <- 15
+P_battery_50_70 <- pnorm_between(50, 70, mu_n3, sd_n3)
